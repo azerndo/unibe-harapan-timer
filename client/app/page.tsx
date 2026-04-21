@@ -24,11 +24,8 @@ export default function Home() {
 
   return (
     <HarapanTimer 
-      logoSrc="/harapan-2026-logo.png"
       themeColor="#467c64"
       positions={positions}
-      presets={times}
-      warningThreshold={15}
     />
   );
 }

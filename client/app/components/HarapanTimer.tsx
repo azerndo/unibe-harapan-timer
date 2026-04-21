@@ -5,6 +5,8 @@ import Image from 'next/image';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Grid } from '@react-three/drei';
 import { Listbox, ListboxButton, ListboxOptions, ListboxOption } from '@headlessui/react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faGlobe, faEnvelope } from '@fortawesome/free-solid-svg-icons';
 
 // --- 3D BACKGROUND COMPONENT ---
 function MovingGridBackground({ themeColor }: { themeColor: string }) {
@@ -356,11 +358,11 @@ export default function HarapanTimer({
       {/* BOTTOM FOOTER */}
       <div className="w-full flex justify-between items-center p-6 text-sm font-semibold relative z-10 opacity-80" style={{ color: themeColor }}>
         <div className="flex items-center gap-2">
-          <span className="w-4 h-4 rounded-full border border-current flex items-center justify-center text-[8px]">🌐</span>
+          <FontAwesomeIcon icon={faGlobe} className="w-4 h-4" />
           www.bicolunibe.com
         </div>
         <div className="flex items-center gap-2">
-          <span className="w-4 h-4 rounded-full border border-current flex items-center justify-center text-[8px]">✉️</span>
+          <FontAwesomeIcon icon={faEnvelope} className="w-4 h-4" />
           bu-unibe@bicol-u.edu.ph
         </div>
         <div className="flex gap-4">
