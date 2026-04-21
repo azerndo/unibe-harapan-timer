@@ -188,9 +188,9 @@ export default function HarapanTimer({
       />
 
       {/* TOP HEADER */}
-      <div className="w-full flex justify-start p-8 relative z-10">
-        <div className="flex items-center gap-3">
-          <div className="w-12 h-12 flex items-center justify-center">
+      <div className="w-full flex justify-start p-3 md:p-6 relative z-10">
+        <div className="flex items-center gap-1.5 md:gap-2">
+          <div className="w-8 h-8 md:w-10 md:h-10 flex items-center justify-center">
             <Image 
               src="/assets/ballotwatch-submark.png" 
               alt="Ballotwatch Submark" 
@@ -199,35 +199,30 @@ export default function HarapanTimer({
             />
           </div>
           <div className="flex flex-col leading-none">
-            <span style={{ color: themeColor }} className="text-sm font-serif italic mb-[-5px]">The Bicol</span>
-            <span style={{ color: themeColor }} className="text-xl font-serif font-black tracking-tight">Universitarian</span>
+            <span style={{ color: themeColor }} className="text-[10px] md:text-xs font-serif italic mb-[-3px] md:mb-[-4px]">The Bicol</span>
+            <span style={{ color: themeColor }} className="text-sm md:text-base font-serif font-black tracking-tight">Universitarian</span>
           </div>
         </div>
       </div>
 
       {/* MAIN CENTER CONTENT */}
-      <div className="flex flex-col items-center justify-center w-full max-w-6xl z-10 px-6 -mt-10 pb-20">
+      <div className="flex flex-col items-center justify-center w-full max-w-6xl z-10 px-4 md:px-6 -mt-6 md:-mt-10 pb-16 md:pb-20">
         
         {/* Title Area */}
-        <div className="text-center mb-8 flex flex-col items-center">
+        <div className="text-center mb-20 md:mb-20 flex flex-col items-center">
           <div className="flex items-center drop-shadow-sm">
-            <h1 
-              className="text-7xl md:text-9xl font-black italic tracking-tighter"
-              style={{ color: themeColor, fontFamily: 'Times New Roman, serif' }}
-            >
-              HARAPAN
-            </h1>
+            <Image 
+              src="/assets/harapan-logo-2025.png" 
+              alt="HARAPAN Logo" 
+              width={200} 
+              height={80}
+              className="w-auto h-auto max-w-[200px] sm:max-w-[300px] md:max-w-[400px] lg:max-w-[500px] xl:max-w-[600px] 2xl:max-w-[700px]"
+            />
           </div>
-          <h2 
-            className="text-lg md:text-2xl font-bold tracking-[0.2em] mt-4 opacity-90"
-            style={{ color: themeColor }}
-          >
-            UNIVERSITY ELECTIONS SPECIAL COVERAGE
-          </h2>
         </div>
 
         {/* Timer Display */}
-        <div className="w-full flex justify-center my-6 relative">
+        <div className="w-full flex justify-center my-4 md:my-6 relative">
           {/* Subtle glow behind the timer */}
           <div className="absolute inset-0 bg-white/20 blur-3xl rounded-full" />
           
@@ -239,7 +234,7 @@ export default function HarapanTimer({
               onBlur={handleEditSubmit}
               onKeyDown={handleEditSubmit}
               autoFocus
-              className="text-[14rem] sm:text-[16rem] md:text-[24rem] leading-none font-black text-center bg-transparent outline-none tracking-widest relative z-10"
+              className="text-7xl sm:text-8xl md:text-[10rem] lg:text-[14rem] xl:text-[18rem] 2xl:text-[20rem] leading-none font-black text-center bg-transparent outline-none tracking-widest relative z-10"
               style={{ color: themeColor, fontFamily: 'var(--font-orbitron), sans-serif' }}
             />
           ) : (
@@ -249,7 +244,7 @@ export default function HarapanTimer({
                 setEditValue(formatTime(timeLeft));
                 setIsRunning(false);
               }}
-              className={`text-[14rem] sm:text-[14rem] md:text-[24rem] leading-none font-black cursor-pointer transition-all duration-300 tracking-widest select-none relative z-10
+              className={`text-7xl sm:text-8xl md:text-[10rem] lg:text-[14rem] xl:text-[18rem] 2xl:text-[20rem] leading-none font-black cursor-pointer transition-all duration-300 tracking-widest select-none relative z-10
                 ${isWarningText ? 'text-red-600 drop-shadow-[0_0_40px_rgba(220,38,38,0.6)] scale-[1.02]' : 'drop-shadow-sm'}
               `}
               style={{ 
@@ -263,11 +258,11 @@ export default function HarapanTimer({
         </div>
 
         {/* Position Dropdown */}
-        <div className="relative w-full max-w-4xl mx-auto my-10 z-50">
+        <div className="relative w-full max-w-4xl mx-auto my-6 md:my-10 z-50">
           <Listbox value={selectedPosition} onChange={setSelectedPosition}>
             <div className="relative">
               <ListboxButton
-                className="w-full text-center text-3xl md:text-5xl py-4 appearance-none outline-none cursor-pointer tracking-wider font-bold border-b-4 transition-colors"
+                className="w-full text-center text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl py-3 md:py-4 appearance-none outline-none cursor-pointer tracking-wider font-bold border-b-4 transition-colors"
                 style={{ 
                   color: themeColor,
                   backgroundColor: bgColor,
@@ -284,7 +279,7 @@ export default function HarapanTimer({
                   <ListboxOption
                     key={pos}
                     value={pos}
-                    className="relative cursor-pointer select-none py-3 px-4 text-center text-2xl font-bold transition-all hover:scale-105 hover:bg-black/5"
+                    className="relative cursor-pointer select-none py-2 md:py-3 px-3 md:px-4 text-center text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold transition-all hover:scale-105 hover:bg-black/5"
                     style={{ color: themeColor }}
                   >
                     {pos}
@@ -296,13 +291,13 @@ export default function HarapanTimer({
         </div>
 
         {/* Controls */}
-        <div className="flex flex-col gap-6 items-center w-full">
-          <div className="flex flex-wrap justify-center gap-4">
+        <div className="flex flex-col gap-4 md:gap-6 items-center w-full">
+          <div className="flex flex-wrap justify-center gap-2 md:gap-4">
             {[120, 90, 60, 30].map((secs) => (
               <button
                 key={secs}
                 onClick={() => setPreset(secs)}
-                className="px-6 py-2 rounded-full font-medium tracking-wide transition-all cursor-pointer hover:bg-black/10 border"
+                className="px-4 md:px-6 py-1.5 md:py-2 rounded-full font-medium tracking-wide transition-all cursor-pointer hover:bg-black/10 border text-sm md:text-base"
                 style={{ backgroundColor: 'transparent', color: `${themeColor}50`, borderColor: `${themeColor}25` }}
               >
                 {secs} SECS
@@ -310,7 +305,7 @@ export default function HarapanTimer({
             ))}
             <button
               onClick={toggleTimer}
-              className="px-8 py-2 rounded-full font-medium tracking-wide transition-all cursor-pointer hover:bg-black/10 border-2"
+              className="px-6 md:px-8 py-1.5 md:py-2 rounded-full font-medium tracking-wide transition-all cursor-pointer hover:bg-black/10 border-2 text-sm md:text-base"
               style={{ 
                 backgroundColor: isRunning ? `${themeColor}08` : 'transparent', 
                 color: `${themeColor}50`,
@@ -321,31 +316,31 @@ export default function HarapanTimer({
             </button>
           </div>
 
-          <div className="flex flex-wrap justify-center gap-3">
+          <div className="flex flex-wrap justify-center gap-2 md:gap-3">
             <button 
               onClick={() => startSoundRef.current?.play().catch(e => console.log("Audio play prevented"))}
-              className="px-4 py-1.5 rounded-full font-normal text-sm border transition-colors cursor-pointer hover:bg-black/10"
+              className="px-3 md:px-4 py-1 md:py-1.5 rounded-full font-normal text-xs md:text-sm border transition-colors cursor-pointer hover:bg-black/10"
               style={{ backgroundColor: 'transparent', color: `${themeColor}40`, borderColor: `${themeColor}20` }}
             >
               Start Sound
             </button>
             <button 
               onClick={() => tenSecSoundRef.current?.play().catch(e => console.log("Audio play prevented"))}
-              className="px-4 py-1.5 rounded-full font-normal text-sm border transition-colors cursor-pointer hover:bg-black/10"
+              className="px-3 md:px-4 py-1 md:py-1.5 rounded-full font-normal text-xs md:text-sm border transition-colors cursor-pointer hover:bg-black/10"
               style={{ backgroundColor: 'transparent', color: `${themeColor}40`, borderColor: `${themeColor}20` }}
             >
               10 Sec Sound
             </button>
             <button 
               onClick={() => endSoundRef.current?.play().catch(e => console.log("Audio play prevented"))}
-              className="px-4 py-1.5 rounded-full font-normal text-sm border transition-colors cursor-pointer hover:bg-black/10"
+              className="px-3 md:px-4 py-1 md:py-1.5 rounded-full font-normal text-xs md:text-sm border transition-colors cursor-pointer hover:bg-black/10"
               style={{ backgroundColor: 'transparent', color: `${themeColor}40`, borderColor: `${themeColor}20` }}
             >
               End Sound
             </button>
             <button 
               onClick={resetTimer}
-              className="px-4 py-1.5 rounded-full font-medium text-sm border transition-colors cursor-pointer hover:bg-red-50"
+              className="px-3 md:px-4 py-1 md:py-1.5 rounded-full font-medium text-xs md:text-sm border transition-colors cursor-pointer hover:bg-red-50"
               style={{ backgroundColor: 'transparent', color: `${themeColor}40`, borderColor: `${themeColor}20` }}
             >
               RESET
@@ -356,16 +351,16 @@ export default function HarapanTimer({
       </div>
 
       {/* BOTTOM FOOTER */}
-      <div className="w-full flex justify-between items-center p-6 text-sm font-semibold relative z-10 opacity-80" style={{ color: themeColor }}>
+      <div className="w-full flex flex-col md:flex-row justify-between items-center gap-3 md:gap-0 p-4 md:p-6 text-xs md:text-sm font-semibold relative z-10 opacity-80" style={{ color: themeColor }}>
         <div className="flex items-center gap-2">
-          <FontAwesomeIcon icon={faGlobe} className="w-4 h-4" />
+          <FontAwesomeIcon icon={faGlobe} className="w-3 h-3 md:w-4 md:h-4" />
           www.bicolunibe.com
         </div>
         <div className="flex items-center gap-2">
-          <FontAwesomeIcon icon={faEnvelope} className="w-4 h-4" />
+          <FontAwesomeIcon icon={faEnvelope} className="w-3 h-3 md:w-4 md:h-4" />
           bu-unibe@bicol-u.edu.ph
         </div>
-        <div className="flex gap-4">
+        <div className="flex gap-2 md:gap-4 flex-wrap justify-center">
           <span>FB: The Bicol Universitarian</span>
           <span>X / IG: @bicolunibe</span>
         </div>
