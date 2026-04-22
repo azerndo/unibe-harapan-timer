@@ -171,7 +171,7 @@ export default function HarapanTimer({
 
       {/* 2. REACT THREE FIBER MOVING GRID */}
       {isMounted && (
-        <div className="absolute inset-0 z-0 pointer-events-none opacity-40">
+        <div className="absolute inset-0 z-0 pointer-events-none opacity-80">
           <Canvas camera={{ position: [0, 0, 15], fov: 50 }}>
             <MovingGridBackground themeColor={themeColor} />
           </Canvas>
@@ -212,7 +212,7 @@ export default function HarapanTimer({
         <div className="text-center mb-20 md:mb-20 flex flex-col items-center">
           <div className="flex items-center drop-shadow-sm">
             <Image 
-              src="/assets/harapan-logo-2025.png" 
+              src="/assets/harapan-logo-2026.png" 
               alt="HARAPAN Logo" 
               width={200} 
               height={80}
