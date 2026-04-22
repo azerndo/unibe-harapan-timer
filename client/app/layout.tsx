@@ -3,6 +3,13 @@ import './globals.css';
 
 export const metadata = {
   title: 'UNIBÊ Harapan',
+  manifest: '/manifest.json',
+  themeColor: '#1e4b41',
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: 'default',
+    title: 'Harapan Timer',
+  },
 };
 
 const poppins = Poppins({ 
@@ -20,7 +27,36 @@ const orbitron = Orbitron({
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${poppins.variable} ${orbitron.variable}`}>
-      <body className="font-sans">{children}</body>
+      <head>
+        <link rel="manifest" href="/manifest.json" />
+        <meta name="theme-color" content="#1e4b41" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        <meta name="apple-mobile-web-app-title" content="Harapan Timer" />
+      </head>
+      <body className="font-sans">
+        {children}
+        {process.env.NODE_ENV === 'production' && (
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+                if ('serviceWorker' in navigator) {
+                  window.addEventListener('load', () => {
+                    navigator.serviceWorker.register('/sw.js')
+                      .then((registration) => {
+                        console.log('Service Worker registered:', registration);
+                        registration.update();
+                      })
+                      .catch((error) => {
+                        console.error('Service Worker registration failed:', error);
+                      });
+                  });
+                }
+              `,
+            }}
+          />
+        )}
+      </body>
     </html>
   );
 }

@@ -80,6 +80,11 @@ export default function HarapanTimer({
   const [isMounted, setIsMounted] = useState(false);
   useEffect(() => setIsMounted(true), []);
   
+  // Loading and offline states
+  const [isLoading, setIsLoading] = useState(true);
+  const [isOnline, setIsOnline] = useState(true);
+  const [audioLoaded, setAudioLoaded] = useState(false);
+  
   const timerRef = useRef<NodeJS.Timeout | null>(null);
   
   // Audio refs
@@ -87,10 +92,54 @@ export default function HarapanTimer({
   const tenSecSoundRef = useRef<HTMLAudioElement | null>(null);
   const endSoundRef = useRef<HTMLAudioElement | null>(null);
   
+  // Monitor online status
   useEffect(() => {
-    startSoundRef.current = new Audio('/assets/audios/startSound.mp3');
-    tenSecSoundRef.current = new Audio('/assets/audios/10secSound.mp3');
-    endSoundRef.current = new Audio('/assets/audios/timerEnd.mp3');
+    const handleOnline = () => setIsOnline(true);
+    const handleOffline = () => setIsOnline(false);
+    
+    window.addEventListener('online', handleOnline);
+    window.addEventListener('offline', handleOffline);
+    
+    setIsOnline(navigator.onLine);
+    
+    return () => {
+      window.removeEventListener('online', handleOnline);
+      window.removeEventListener('offline', handleOffline);
+    };
+  }, []);
+  
+  // Preload audio files
+  useEffect(() => {
+    const loadAudio = async () => {
+      try {
+        const startAudio = new Audio('/assets/audios/startSound.mp3');
+        const tenSecAudio = new Audio('/assets/audios/10secSound.mp3');
+        const endAudio = new Audio('/assets/audios/timerEnd.mp3');
+        
+        startAudio.preload = 'auto';
+        tenSecAudio.preload = 'auto';
+        endAudio.preload = 'auto';
+        
+        // Wait for audio to load
+        await Promise.all([
+          startAudio.load(),
+          tenSecAudio.load(),
+          endAudio.load()
+        ]);
+        
+        startSoundRef.current = startAudio;
+        tenSecSoundRef.current = tenSecAudio;
+        endSoundRef.current = endAudio;
+        setAudioLoaded(true);
+      } catch (error) {
+        console.warn('Audio files failed to load:', error);
+        setAudioLoaded(false);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    
+    loadAudio();
   }, []);
 
   // --- Timer Logic ---
@@ -155,11 +204,40 @@ export default function HarapanTimer({
   const isCriticalScreen = timeLeft <= 5 && timeLeft > 0;
   const isExpired = timeLeft === 0 && !isEditing;
 
+  // Loading screen
+  if (isLoading) {
+    return (
+      <div 
+        className="relative flex flex-col items-center justify-center min-h-screen font-sans"
+        style={{ backgroundColor: bgColor }}
+      >
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-16 w-16 border-b-4 mx-auto mb-4" style={{ borderColor: themeColor }} />
+          <p style={{ color: themeColor }} className="text-lg font-semibold">Loading Harapan Timer...</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div 
       className="relative flex flex-col items-center justify-between min-h-screen font-sans selection:bg-[#1e4b41]/20 overflow-hidden"
       style={{ backgroundColor: bgColor }} // Base Cream Background
     >
+      {/* Offline indicator */}
+      {!isOnline && (
+        <div className="fixed top-4 right-4 z-50 bg-red-500 text-white px-4 py-2 rounded-lg shadow-lg text-sm font-semibold flex items-center gap-2">
+          <span className="w-2 h-2 bg-white rounded-full animate-pulse" />
+          Offline Mode
+        </div>
+      )}
+      
+      {/* Audio loading indicator */}
+      {!audioLoaded && (
+        <div className="fixed top-4 left-4 z-50 bg-yellow-500 text-white px-4 py-2 rounded-lg shadow-lg text-sm font-semibold">
+          Audio Loading...
+        </div>
+      )}
       {/* 1. IMMERSIVE FULL-SCREEN RED OVERLAY */}
       <div 
         className={`fixed inset-0 z-50 pointer-events-none transition-opacity duration-1000 ease-in-out

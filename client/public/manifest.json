@@ -1,0 +1,18 @@
+{
+  "name": "Harapan Timer",
+  "short_name": "Harapan Timer",
+  "description": "Professional debate timer for HARAPAN 2026",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#fefbf5",
+  "theme_color": "#1e4b41",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/assets/harapan-logo-2026.PNG",
+      "sizes": "any",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
