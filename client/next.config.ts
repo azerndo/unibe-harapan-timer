@@ -10,7 +10,7 @@ export default withPWA({
   dest: "public",
   register: true,
   skipWaiting: true,
-  disable: process.env.NODE_ENV === "development",
+  disable: false,
   runtimeCaching: [
     {
       urlPattern: /\.(?:mp3|wav|ogg)$/i,
