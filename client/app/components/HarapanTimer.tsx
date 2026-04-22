@@ -212,7 +212,7 @@ export default function HarapanTimer({
         <div className="text-center mb-20 md:mb-20 flex flex-col items-center">
           <div className="flex items-center drop-shadow-sm">
             <Image 
-              src="/assets/harapan-logo-2026.png" 
+              src="/assets/harapan-logo-2026.PNG" 
               alt="HARAPAN Logo" 
               width={200} 
               height={80}
